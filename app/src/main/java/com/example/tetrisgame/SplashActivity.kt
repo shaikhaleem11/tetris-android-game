@@ -1,9 +1,13 @@
 package com.example.tetrisgame
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,14 +16,11 @@ class SplashActivity : AppCompatActivity() {
         // Assuming your splash screen layout file is named activity_splash
         setContentView(R.layout.activity_splash)
 
-        // Add a delay to simulate the splash screen
-        val splashDelayMillis = 2000L // 2 seconds
-        Thread.sleep(splashDelayMillis)
-
-        // Start the main activity after the delay
-        startActivity(Intent(this, MainActivity::class.java))
-
-        // Close the splash activity to prevent it from showing again when pressing back
-        finish()
+        // Using a Handler associated with the MainLooper to delay the transition to MainActivity for 2 seconds (2000 milliseconds)
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // Close the splash activity so that it's not in the back stack
+        }, 2000)
     }
 }
