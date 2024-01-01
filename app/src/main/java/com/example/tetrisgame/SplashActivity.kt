@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_play_button.playButton
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
 
         // Using a Handler associated with the MainLooper to delay the transition to MainActivity for 2 seconds (2000 milliseconds)
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, playButton::class.java)
             startActivity(intent)
             finish() // Close the splash activity so that it's not in the back stack
         }, 2000)
